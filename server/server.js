@@ -4,12 +4,10 @@ import fs from "fs"
 import path from "path"
 import App from "../src/App.tsx"
 import { renderToString } from "react-dom/server"
-import cors from "cors"
 
+const PORT = process.env.PORT || 5000; 
 const app = express()
 
-
-app.use(cors({ origin: ["https://webpack-ssr.onrender.com"], credentials: true }));
 app.use("^/$", (req,res) => {
 
   fs.readFile(path.resolve("./build/index.html"),"utf-8",(err, data) => {
@@ -70,6 +68,6 @@ console.log(req.url)
 
 })
 
-app.listen(5000,() => {
-  console.log("running 5000")
+app.listen(PORT,() => {
+  console.log(`running ${PORT}`)
 })
